@@ -1,0 +1,62 @@
+mvn clean -Dspark.scope=provided assembly:assembly -Dmaven.test.skip=true
+
+
+./kafka-console-consumer.sh --bootstrap-server 10.200.131.116:9092,10.200.131.117:9092,10.200.131.118:9092 --topic dmp.gateway.formatted-dop.visit.collect_V2
+
+
+mvn clean assembly:assembly -Dmaven.test.skip=true
+
+
+alter 'gejx_test6' , METHOD =>'table_att','coprocessor'=>'hdfs://dev-dmp2.fengdai.org:8020/apps/hbase/hbase-observer-example-v10.jar|com.tairanchina.csp.dmp.examples.HbaseDataSyncEsObserver|1073741823|es_cluster=elasticsearch,es_host=10.200.168.15,es_port=9300,es_index=gejx_test'
+alter 'gejx_test6' , METHOD =>'table_att','coprocessor'=>'hdfs://dev-dmp2.fengdai.org:8020/apps/hbase/hbase-observer-simple-example-v8.jar|com.tairanchina.csp.dmp.examples.HbaseDataSyncEsObserver|1073741823|es_cluster=elasticsearch,es_host=10.200.168.15,es_port=9300,es_index=gejx_test'
+
+create 'gejx_test6','cf'
+
+put 'gejx_test6', '6','cf:name','gjx1222'
+enable 'gejx_test6'
+disable 'gejx_test6'
+alter 'gejx_test6', METHOD => 'table_att_unset', NAME => 'coprocessor$1'
+alter 'gejx_test8' , METHOD =>'table_att','coprocessor'=>'hdfs://dev-dmp2.fengdai.org:8020/apps/hbase/hbase-observer-simple-example-v5.jar|com.tairanchina.csp.dmp.examples.HbaseDataSyncEsObserver|1073741823'
+
+ods-ml
+dvi
+ERROR UrlResolveUtil: Expected authority at index 7: http://
+pus
+ERROR UrlResolveUtil: Expected authority at index 7: http://
+
+DMP:FD_FENGDAI_RISKCONTROL_LOAN_APPLY_COLD_DATA
+
+
+<div class="justified-gallery">
+![Elephant](images/logo.png)
+</div>
+
+
+
+org.apache.hadoop.hbase.PleaseHoldException: Master is initializing
+
+
+scan 'hbase:meta',{STARTROW=>'gejx_tes12'}
+
+
+standby导致位置出现偏移
+
+
+hadoop fs -rm -r -f  /apps/hbase/data/data/default/gejx_test14
+rmr /hbase-secure/table/gejx_test14
+
+
+
+alter 'GJX_TEST' , METHOD =>'table_att','coprocessor'=>'/apps/hbase/hbase-observer-example-v7.jar|com.tairanchina.csp.dmp.examples.HbaseDataSyncEsObserver|1073741823|es_cluster=elasticsearch,es_host=10.200.168.15,es_port=9300,es_index=dop_visit_info'
+alter 'GJX_TEST', METHOD => 'table_att_unset', NAME => 'coprocessor$6'
+disable 'GJX_TEST1'
+
+enable 'GJX_TEST4'
+
+create table if not exists gjx_test(
+ id varchar not null primary key,
+ dop_visit_visitid bigint
+);
+
+upsert into gjx_test (id,dop_visit_visitid) values('test4',111);
+upsert into gjx_test (id,dop_visit_visitid) values('test4','2018-12-12 12:11:11');
