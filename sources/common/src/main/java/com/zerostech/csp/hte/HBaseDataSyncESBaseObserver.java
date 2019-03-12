@@ -1,7 +1,5 @@
 package com.zerostech.csp.hte;
 
-import com.zerostech.csp.hte.phoenix.PhoenixUtils;
-import com.zerostech.csp.hte.phoenix.TableSchema;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.CoprocessorEnvironment;
 import org.apache.hadoop.hbase.coprocessor.RegionCoprocessor;
@@ -9,10 +7,7 @@ import org.apache.hadoop.hbase.coprocessor.RegionObserver;
 import org.apache.yetus.audience.InterfaceAudience;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -24,20 +19,25 @@ import java.util.Optional;
 public abstract class HBaseDataSyncESBaseObserver implements RegionObserver, RegionCoprocessor {
 
     private static final Logger logger = LoggerFactory.getLogger(HBaseDataSyncESBaseObserver.class);
-    protected static Map<String, TableSchema> tableSchema = new HashMap<>();
 
     private static void readConfiguration(CoprocessorEnvironment env) {
         Configuration conf = env.getConfiguration();
-        logger.info("****init params " + conf.toString());
-        logger.info("****init params " + conf.get("es_cluster", "elasticsearch"));
-        logger.info("****init params " + conf.get("es_host", "localhost"));
         ESClient.clusterName = conf.get("es_cluster", "elasticsearch");
         ESClient.nodeHost = conf.get("es_host", "localhost");
         ESClient.nodePort = conf.getInt("es_port", 9300);
         ESClient.indexName = conf.get("es_index");
+        ESClient.transportEnabled = conf.getBoolean("es_transport_enabled", true);
+        ESClient.truststorePath = conf.get("es_truststore_path");
+        ESClient.keystorePath = conf.get("es_keystore_path");
+        logger.debug("Init Parameter: [clusterName: {}, nodeHost: {}, nodePort: {}, indexName: {}, transportEnabled: {}, truststorePath:{}, truststorePath:{}, keystorePath:{}.]",
+                ESClient.clusterName,
+                ESClient.nodeHost,
+                ESClient.nodePort,
+                ESClient.indexName,
+                ESClient.transportEnabled,
+                ESClient.truststorePath,
+                ESClient.keystorePath);
     }
-
-    public abstract String getTableSchema();
 
     public Optional<RegionObserver> getRegionObserver() {
         return Optional.of(this);
@@ -45,12 +45,10 @@ public abstract class HBaseDataSyncESBaseObserver implements RegionObserver, Reg
 
     @Override
     public void start(CoprocessorEnvironment env) throws IOException {
-        logger.info("****init start first*****");
         readConfiguration(env);
         // init ES client
         ESClient.initEsClient();
-        logger.info("****init start*****");
-        tableSchema = PhoenixUtils.getTableSchema(getTableSchema());
+        logger.info("Coprocessor Environment Initialized");
     }
 
     @Override
@@ -58,6 +56,7 @@ public abstract class HBaseDataSyncESBaseObserver implements RegionObserver, Reg
         ESClient.closeEsClient();
         // shutdown time task
         ElasticSearchBulkOperator.shutdownScheduleEx();
-        logger.info("****end*****");
+        logger.info("HBase Data Sync Es Observer Finished");
     }
 }
+

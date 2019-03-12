@@ -1,5 +1,8 @@
 package com.zerostech.csp.hte;
 
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.elasticsearch.action.DocWriteRequest;
 import org.elasticsearch.action.bulk.BackoffPolicy;
 import org.elasticsearch.action.bulk.BulkProcessor;
@@ -8,8 +11,6 @@ import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.common.unit.ByteSizeUnit;
 import org.elasticsearch.common.unit.ByteSizeValue;
 import org.elasticsearch.common.unit.TimeValue;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ElasticSearchBulkOperator {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ElasticSearchBulkOperator.class);
+    private static final Log LOG = LogFactory.getLog(ElasticSearchBulkOperator.class);
 
     private static BulkProcessor bulkRequestBuilder;
 

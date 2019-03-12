@@ -24,12 +24,63 @@
         <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>twill-common</artifactId>
+                    <groupId>org.apache.twill</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>twill-core</artifactId>
+                    <groupId>org.apache.twill</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>twill-zookeeper</artifactId>
+                    <groupId>org.apache.twill</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>tephra-core</artifactId>
+                    <groupId>org.apache.tephra</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>stream</artifactId>
+                    <groupId>com.clearspring.analytics</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hbase-mapreduce</artifactId>
+                    <groupId>org.apache.hbase</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpclient</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>httpcore</artifactId>
+                    <groupId>org.apache.httpcomponents</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>joda-time</artifactId>
+                    <groupId>joda-time</groupId>
+                </exclusion>
+            </exclusions>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>javax.el</artifactId>
             <version>3.0.1-b06</version>
+        </dependency>
+        <dependency>
+            <groupId>com.floragunn</groupId>
+            <artifactId>search-guard-ssl</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

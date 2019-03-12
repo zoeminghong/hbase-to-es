@@ -36,6 +36,7 @@
         <hbase.version>2.0.0</hbase.version>
         <phoenix.version>5.0.0-HBase-2.0</phoenix.version>
         <hadoop.version>3.1.0</hadoop.version>
+        <search.guard.ssl.version>6.5.4-25.5</search.guard.ssl.version>
         <maven.deploy.skip>false</maven.deploy.skip>
         <maven.install.skip>false</maven.install.skip>
     </properties>
@@ -90,7 +91,11 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
+            <dependency>
+                <groupId>com.floragunn</groupId>
+                <artifactId>search-guard-ssl</artifactId>
+                <version>${search.guard.ssl.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

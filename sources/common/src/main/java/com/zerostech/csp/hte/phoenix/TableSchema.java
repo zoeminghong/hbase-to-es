@@ -10,7 +10,10 @@ import java.io.Serializable;
 public class TableSchema implements Serializable {
     private String columnName;
     private String columnQualifier;
-    private String type="VARCHAR";
+    private String type="";
+
+    public TableSchema() {
+    }
 
     public TableSchema(String columnName, String columnQualifier) {
         this.columnName = columnName;
